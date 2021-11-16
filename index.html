@@ -707,15 +707,27 @@
         jumbotronNode.style.backgroundColor = "yellow"
       }
 
-      // const removeLinks = function () {
-      //   let elsewhereNode = document.getElementsByName("ol")[1]
-      //   console.log(elsewhereNode)
-      //   elsewhereNode.remove()
-      // }
+      const removeLinks = function () {
+        let elsewhereNode = document.querySelector("ol:last-child")
+        console.log(elsewhereNode)
+        elsewhereNode.parentElement.removeChild(elsewhereNode)
+      }
 
       const changeHeader = function () {
         let headerNode = document.querySelectorAll(".jumbotron  h1")[0]
         headerNode.style.fontSize = "100px"
+      }
+      const removeGlass = function () {
+        let glassNode = document.querySelector("header svg")
+        glassNode.remove()
+      }
+
+      const trim = function () {
+        let paragraphNode = document.querySelectorAll(
+          ".blog-post:first-of-type p"
+        )[1]
+
+        paragraphNode.innerText = paragraphNode.innerText.substring(49)
       }
     </script>
   </body>
