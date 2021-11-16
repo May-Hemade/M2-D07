@@ -735,10 +735,50 @@
         paragraphNode.innerText = paragraphNode.innerText.substring(49)
       }
 
-      const newButton = function () {
+      const newButton = function (eventData) {
+        eventData.preventDefault()
         let newPost = document.createElement("div")
         newPost.classList.add("blog-post")
-        let newPostTitle = document.createElement("p")
+
+        let newPostTitle = document.createElement("h2")
+        newPostTitle.classList.add("blog-post-title")
+        newPostTitle.innerText = "Ana Benito"
+        newPost.appendChild(newPostTitle)
+        let mainNode = document.querySelector("div .blog-main")
+        mainNode.appendChild(newPost)
+      }
+
+      const setNewerButtonListener = function () {
+        let buttonNode = document.querySelector("nav > .btn:last-of-type")
+        buttonNode.classList.remove("disabled")
+        buttonNode.ariaDisabled = "false"
+        buttonNode.addEventListener("click", newButton)
+      }
+
+      const setOlderButtonListener = function () {
+        let buttonNode = document.querySelector("nav > .btn")
+
+        buttonNode.addEventListener("click", deleteBlog)
+      }
+      const deleteBlog = function (eventData) {
+        eventData.preventDefault()
+        let blogPostNodes = document.getElementsByClassName("blog-post")
+        blogPostNodes[blogPostNodes.length - 1].remove()
+      }
+      const authorName = function () {
+        let authorNodes = document.querySelectorAll(".blog-post h2 + p a")
+        for (let authorNode of authorNodes) {
+          authorNode.addEventListener("mouseover", alertAuthor)
+        }
+      }
+      const alertAuthor = function (eventData) {
+        alert(eventData.target.innerText)
+      }
+
+      window.onload = () => {
+        setNewerButtonListener()
+        setOlderButtonListener()
+        authorName()
       }
     </script>
   </body>
